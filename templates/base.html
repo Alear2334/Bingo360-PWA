@@ -2,7 +2,9 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Control Bingo 360</title>
+    
     <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
     
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
@@ -12,8 +14,8 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(reg => console.log('Service Worker registrado con éxito'))
+                navigator.serviceWorker.register("{{ url_for('static', filename='sw.js') }}")
+                    .then(reg => console.log('Service Worker registrado correctamente'))
                     .catch(err => console.log('Error al registrar Service Worker:', err));
             });
         }
@@ -35,7 +37,7 @@
         {% if session.get('logged_in') %}
         <div style="margin-top: 50px; padding: 20px; border-top: 2px solid #ccc;">
             <h3>Cambiar Usuario y Clave</h3>
-            <form action="/editar_credenciales" method=\"POST\">
+            <form action="/editar_credenciales" method="POST">
                 <input type="text" name="usuario" placeholder="Nuevo Usuario" required>
                 <input type="text" name="clave" placeholder="Nueva Clave" required>
                 <button type="submit">Guardar Cambios</button>
